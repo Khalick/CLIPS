@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIPS TECHNICAL COLLAGE</title>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #3508da;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        header {
+            background-color: #af045a;
+            color: rgb(221, 5, 5);
+            padding: 10px 0;
+            ' ''
+            margin-bottom: 5px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .user-info {
+            text-align: right;
+            font-size: 24px;
+            color: yellowgreen;
+            margin-right: 10px;
+        }
+        
+        nav {
+            background-color: #1a022b;
+            padding: 10px 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-item a {
+            color: rgb(222, 228, 222);
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+        
+        .nav-item a:hover {
+            background-color: #c90909;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: rgb(17, 2, 54);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-menu a {
+            color: #e40606;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .dashboard {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #c7040e;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card2 {
+            background-color: rgb(14, 199, 7);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .card2:hover{
+            background-color:rgb(34, 4, 168);
+            
+        }
+        
+        .unit-list {
+            list-style: none;
+        }
+        
+        .unit-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #88B04B;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .student-profile {
+            width: 300px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .student-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a022b;
+            margin: 0 auto 15px;
+            display: block;
+        }
+        
+        .fee-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .fee-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .fee-value {
+            color: #1a022b;
+            font-weight: bold;
+        }
+        
+        .logout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .logout-btn {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+   <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="file:///C:/Users/brian/Desktop/CLIPS/logo.jpg" alt="CLIPS Logo" class="logo-img">
+                    <div class="logo-text">CLIPS TECHNICAL COLLEGE</div>
+                </div>
+                <div class="logout-container">
+                    <div class="user-info">Welcome back</div>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Finance</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Fee Statement</a>
+                        <a href="#">Financial Receipt</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Academics</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Exam Card</a>
+                        <a href="#">Results</a>
+                        <a href="#">Register Units</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Timetable</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Sem 1 timetable</a>
+                        <a href="#">Sem 2 timetable</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Evaluation</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Course evaluation </a>
+                        <a href="#">Semester evaluation</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Socials</a>
+                    <div class="dropdown-menu">
+                        <a href="#">News</a>
+                        <a href="#">Events</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Settings</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Change Password</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="dashboard-container">
+            <div class="dashboard">
+                <div class="card">
+                    <h2>Current Registered Units</h2>
+                    <ul class="unit-list" id="registeredUnits">
+                        <li>
+                            <strong>Unit Name</strong>
+                            <strong>Unit Code</strong>
+                            <strong>Status</strong>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="fee-details">
+                        <div class="card2">
+                            <div class="fee-item">
+                                <span class="fee-label">Fee Balance:</span>
+                                <span class="fee-value" id="feeBalance">KSH 15,000</span>
+                            </div>
+                        </div>
+                        <div class="card2">
+                            <div class="fee-item">
+                                <span class="fee-label">Total Paid:</span>
+                                <span class="fee-value" id="totalPaid">KSH 35,000</span>
+                            </div>
+                        </div>
+                        <div class="card2">
+                            <div class="fee-item">
+                                <span class="fee-label">Semester Fee:</span>
+                                <span class="fee-value" id="semesterFee">KSH 50,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="free-balance">
+                        <p>HI, <span id="greetingName">Oduor</span></p>
+                        <p><B>Course: <span id="displayCourse">Computer Science</span></B></p>
+                        <p>Current Session Progress: <span id="sessionProgress">65%</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="student-profile">
+                <img src="file:///C:/Users/brian/Desktop/CLIPS/side%20image.jpg" alt="Student Image" class="student-image" id="studentImage">
+                <div class="student-details">
+                    <h2 id="studentName">Brian Oduor</h2>
+                    <p><strong>Registration Number:</strong> <span id="regNumber">CLP/2023/001</span></p>
+                    <p><strong>Course:</strong> <span id="courseName">Diploma in Computer Science</span></p>
+                    <p><strong>Year/Semester:</strong> <span id="yearSemester">Year 2, Semester 1</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const storage = firebase.storage();
+
+        // Check if user is logged in when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('currentUser');
+            const studentId = localStorage.getItem('studentId'); // Assuming you store student ID
+            
+            if (!username) {
+                window.location.href = 'login page.html';
+                return;
+            }
+
+            // Update welcome message
+            document.querySelectorAll('.user-info').forEach(element => {
+                element.textContent = `Welcome back, ${username}`;
+            });
+
+            // Fetch student photo from Firebase Storage
+            const storageRef = storage.ref(`student-photos/${studentId}.jpg`);
+            storageRef.getDownloadURL()
+                .then((url) => {
+                    document.getElementById('studentImage').src = url;
+                })
+                .catch((error) => {
+                    console.error("Error loading photo:", error);
+                    document.getElementById('studentImage').src = "https://via.placeholder.com/120"; // Fallback image
+                });
+
+            // Sample data - in a real app, this would come from your Django API
+            const studentData = {
+                regNumber: "CLP/2023/001",
+                course: "Diploma in Computer Science",
+                yearSemester: "Year 2, Semester 1",
+                feeBalance: "KSH 15,000",
+                totalPaid: "KSH 35,000",
+                semesterFee: "KSH 50,000",
+                sessionProgress: "65%",
+                units: [
+                    { name: "Database Systems", code: "CS201", status: "Registered" },
+                    { name: "Web Development", code: "CS202", status: "Registered" },
+                    { name: "Operating Systems", code: "CS203", status: "Pending" },
+                    { name: "Data Structures", code: "CS204", status: "Registered" }
+                ]
+            };
+
+            // Populate student details
+            document.getElementById('studentName').textContent = username;
+            document.getElementById('greetingName').textContent = username.split(' ')[0];
+            document.getElementById('regNumber').textContent = studentData.regNumber;
+            document.getElementById('courseName').textContent = studentData.course;
+            document.getElementById('displayCourse').textContent = studentData.course;
+            document.getElementById('yearSemester').textContent = studentData.yearSemester;
+            document.getElementById('feeBalance').textContent = studentData.feeBalance;
+            document.getElementById('totalPaid').textContent = studentData.totalPaid;
+            document.getElementById('semesterFee').textContent = studentData.semesterFee;
+            document.getElementById('sessionProgress').textContent = studentData.sessionProgress;
+
+            // Populate registered units
+            const unitsList = document.getElementById('registeredUnits');
+            unitsList.innerHTML = '<li><strong>Unit Name</strong><strong>Unit Code</strong><strong>Status</strong></li>';
+            
+            studentData.units.forEach(unit => {
+                const unitItem = document.createElement('li');
+                unitItem.innerHTML = `
+                    <span>${unit.name}</span>
+                    <span>${unit.code}</span>
+                    <span>${unit.status}</span>
+                `;
+                unitsList.appendChild(unitItem);
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('studentId');
+                window.location.href = 'login page.html';
+            });
+
+            /* In a real implementation, you would fetch data from Django like this:
+            fetch(`/api/students/${studentId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate all fields with real data
+                })
+                .catch(error => console.error('Error:', error));
+            */
+        });
+    </script>
+</body>
+</html>

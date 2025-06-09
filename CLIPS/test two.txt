@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIPS TECHNICAL COLLAGE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #1a022b;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .user-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .user-info {
+            font-size: 18px;
+            color: yellowgreen;
+        }
+        
+        .logout-btn {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        nav {
+            background-color: #1a022b;
+            padding: 5px 0;
+            margin-bottom: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+        
+        .nav-item a:hover {
+            background-color: #c90909;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: rgb(17, 2, 54);
+            min-width: 180px;
+            z-index: 1;
+        }
+        
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .content-area {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .dashboard {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .card {
+           background-color: rgb(4, 156, 37);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .student-profile {
+            width: 300px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .student-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        
+        .fee-details {
+            margin-top: 15px;
+            background-color: rgb(4, 156, 37);
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            
+        }
+        
+        #registeredUnits li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card h2 {
+            color: #c7040e;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="file:///C:/Users/brian/Desktop/CLIPS/logo.jpg" alt="CLIPS Logo" class="logo-img">
+                <div class="logo-text">CLIPS TECHNICAL COLLEGE</div>
+            </div>
+            <div class="user-container">
+                <div class="user-info">Welcome back</div>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Finance</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Fee Statement</a>
+                        <a href="#">Financial Receipt</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Academics</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Exam Card</a>
+                        <a href="#">Results</a>
+                        <a href="#">Register Units</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Timetable</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Sem 1 timetable</a>
+                        <a href="#">Sem 2 timetable</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="content-area">
+            <div class="dashboard">
+                <div class="card">
+                    <h2>Current Registered Units</h2>
+                    <ul id="registeredUnits">
+                        <li>Database Systems - CS201 (Registered)</li>
+                        <li>Web Development - CS202 (Registered)</li>
+                        <li>Operating Systems - CS203 (Pending)</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2>Fee Information</h2>
+                    <div class="fee-details">
+                        <div class="fee-item">
+                            <span>Fee Balance:</span>
+                            <span>KSH 15,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Total Paid:</span>
+                            <span>KSH 35,000</span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Semester Fee:</span>
+                            <span>KSH 50,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="student-profile">
+                <img src="file:///C:/Users/brian/Desktop/CLIPS/side%20image.jpg" alt="Student" class="student-image">
+                <h3 id="studentName">Brian Oduor</h3>
+                <p>Reg No: CLP/2023/001</p>
+                <p>Course: Computer Science</p>
+                <p>Year 2, Semester 1</p>
+                <div class="contact-info" style="margin-top: 15px;">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> brian@clips.ac.ke</p>
+                    <p><strong>Phone:</strong> +254 712 345 678</p>
+                    <p><strong>Address:</strong> 123 Campus Rd, Nairobi</p>
+                    <p><strong>Emergency Contact:</strong> +254 700 000 000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const username = localStorage.getItem('currentUser');
+        if (username) {
+            document.querySelector('.user-info').textContent = `Welcome back, ${username}`;
+            document.getElementById('studentName').textContent = username;
+        }
+        
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login page.html';
+        });
+    });
+    </script>
+</body>
+</html>
